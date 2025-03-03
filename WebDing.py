@@ -13,13 +13,15 @@ def main():
             }
             .subtitle {
                 font-size: 18px;
-                color: #333333;
+                color: red;
                 text-align: center;
             }
             .radio-box {
                 background-color: #F5F5F5;
-                padding: 10px;
+                padding: 5px;
                 border-radius: 10px;
+                border: 1px solid #333;
+                margin-bottom: 5px;
             }
             .submit-button {
                 background-color: #FF5733 !important;
@@ -27,6 +29,11 @@ def main():
                 font-size: 20px !important;
                 border-radius: 10px !important;
                 width: 100%;
+            }
+            .table-container {
+                border: 2px solid #333;
+                padding: 10px;
+                border-radius: 10px;
             }
         </style>
         """,
@@ -51,10 +58,11 @@ def main():
     selections = {}
     
     st.markdown("### 配送商品清單")
+    st.markdown("<div class='table-container'>", unsafe_allow_html=True)
     for product, options in products.items():
-        st.markdown(f"**{product}**")
+        st.markdown(f"<div class='radio-box'><strong>{product}</strong></div>", unsafe_allow_html=True)
         selections[product] = st.radio("選擇配送方式", options, key=product, horizontal=True)
-        st.markdown("---")
+    st.markdown("</div>", unsafe_allow_html=True)
     
     # 文字說明
     st.markdown("<div class='subtitle'>起手無回大丈夫，確認無誤請送出</div>", unsafe_allow_html=True)
@@ -67,6 +75,3 @@ def main():
     
 if __name__ == "__main__":
     main()
-
-
-
