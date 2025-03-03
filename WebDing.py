@@ -1,4 +1,9 @@
 import streamlit as st
+import pandas as pd
+
+def save_data(selections):
+    df = pd.DataFrame(list(selections.items()), columns=["商品名稱", "配送方式"])
+    df.to_csv("order_data.csv", index=False, encoding="utf-8-sig")
 
 def main():
     # 設定網頁標題與主題顏色
@@ -42,18 +47,18 @@ def main():
     )
     
     # 標題
-    st.markdown("<div class='title'>丁丁快遞服務中心</div>", unsafe_allow_html=True)
+    st.markdown("<div class='title'>丁丁快遞服務中心XD</div>", unsafe_allow_html=True)
     
     # 內文
-    st.markdown("<div class='subtitle'>請選擇商品配送方式，勾選完畢後記得送出</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>請選擇商品配送地點，勾選完畢後送出</div>", unsafe_allow_html=True)
     
     # 商品配送選項
     products = {
-        "精淬玫瑰四物飲": ["萬運", "青田街"],
-        "天地合補含鐵四物飲盒裝6瓶": ["萬運", "青田街"],
-        "加倍佳酸甜軟糖袋裝10包彩虹造型": ["萬運", "青田街"],
-        "得意的一天玄米油": ["萬運", "青田街"],
-        "得意的一天極選酪梨油": ["萬運", "青田街"]
+        "精淬玫瑰四物飲2盒": ["萬運", "青田街"],
+        "天地合補含鐵四物飲盒裝6瓶4盒": ["萬運", "青田街"],
+        "加倍佳酸甜軟糖袋裝10包彩虹造型1袋": ["萬運", "青田街"],
+        "得意的一天玄米油1瓶": ["萬運", "青田街"],
+        "得意的一天極選酪梨油1瓶": ["萬運", "青田街"]
     }
     
     selections = {}
@@ -66,11 +71,12 @@ def main():
     st.markdown("</div>", unsafe_allow_html=True)
     
     # 文字說明
-    st.markdown("<div class='subtitle'>起手無回大丈夫，確認無誤請送出</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>起手無回大丈夫，確認無誤請按送出~</div>", unsafe_allow_html=True)
     
     # 送出按鈕
-    if st.button("送出服務鈴", key="submit", help="確認後點擊送出"):
-        st.success("丁丁飛踢！")
+    if st.button("送出小牛服務鈴", key="submit", help="確認後點擊送出"):
+        st.success("丁丁飛踢！！！")
+        save_data(selections)
         for product, choice in selections.items():
             st.write(f"{product}: {choice}")
     
