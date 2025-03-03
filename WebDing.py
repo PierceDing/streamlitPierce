@@ -22,6 +22,7 @@ def main():
                 border-radius: 10px;
                 border: 1px solid #333;
                 margin-bottom: 5px;
+                color: blue;
             }
             .submit-button {
                 background-color: #FF5733 !important;
