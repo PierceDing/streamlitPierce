@@ -78,7 +78,7 @@ def main():
     st.markdown("<div class='title'>丁丁快遞服務中心XD</div>", unsafe_allow_html=True)
     
     # 內文
-    st.markdown("<div class='subtitle'>請選擇商品配送地點，勾選完畢後送出</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>請選擇商品配送地點</div>", unsafe_allow_html=True)
     
     # 商品配送選項
     products = {
@@ -99,11 +99,11 @@ def main():
     st.markdown("</div>", unsafe_allow_html=True)
     
     # 文字說明
-    st.markdown("<div class='subtitle'>起手無回大丈夫，確認無誤請按送出~</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>起手無回大丈夫，下好離手請送出~</div>", unsafe_allow_html=True)
     
     # 送出按鈕
-    if st.button("送出小牛服務鈴", key="submit", help="確認後點擊送出"):
-        st.success("丁丁飛踢！！！ 訂單已儲存並發送！")
+    if st.button("送出小牛服務鈴", key="submit"):
+        st.success("丁丁飛踢！！！")
         save_data(selections)
         send_email()
         for product, choice in selections.items():
