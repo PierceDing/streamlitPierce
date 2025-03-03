@@ -1,9 +1,23 @@
 import streamlit as st
 import pandas as pd
+import yagmail
 
 def save_data(selections):
     df = pd.DataFrame(list(selections.items()), columns=["商品名稱", "配送方式"])
     df.to_csv("order_data.csv", index=False, encoding="utf-8-sig")
+
+def send_email():
+    receiver = "ggy2354@gmail.com"
+    subject = "丁丁快遞服務中心 - 訂單紀錄"
+    body = "您好，這是您的訂單紀錄，請查收附件。\n\n感謝您的使用！"
+    filename = "order_data.csv"
+    
+    try:
+        yag = yagmail.SMTP("your_email@gmail.com", "your_app_password")
+        yag.send(to=receiver, subject=subject, contents=body, attachments=filename)
+        st.success("訂單已成功寄送至 ggy2354@gmail.com！")
+    except Exception as e:
+        st.error(f"郵件發送失敗: {e}")
 
 def main():
     # 設定網頁標題與主題顏色
@@ -77,6 +91,7 @@ def main():
     if st.button("送出小牛服務鈴", key="submit", help="確認後點擊送出"):
         st.success("丁丁飛踢！！！")
         save_data(selections)
+        send_email()
         for product, choice in selections.items():
             st.write(f"{product}: {choice}")
     
