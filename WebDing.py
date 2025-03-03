@@ -1,19 +1,70 @@
 import streamlit as st
 
 def main():
-    st.title("簡單的 Streamlit 網頁")
-    st.write("這是一個基本的 Streamlit 網頁，包含 Checkbox 和送出按鈕。")
+    # 設定網頁標題與主題顏色
+    st.markdown(
+        """
+        <style>
+            .title {
+                font-size: 36px;
+                font-weight: bold;
+                color: #FF5733;
+                text-align: center;
+            }
+            .subtitle {
+                font-size: 18px;
+                color: #333333;
+                text-align: center;
+            }
+            .radio-box {
+                background-color: #F5F5F5;
+                padding: 10px;
+                border-radius: 10px;
+            }
+            .submit-button {
+                background-color: #FF5733 !important;
+                color: white !important;
+                font-size: 20px !important;
+                border-radius: 10px !important;
+                width: 100%;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     
-    # Checkbox
-    agree = st.checkbox("我同意條款")
+    # 標題
+    st.markdown("<div class='title'>丁丁快遞服務中心</div>", unsafe_allow_html=True)
+    
+    # 內文
+    st.markdown("<div class='subtitle'>請選擇商品配送方式，勾選完畢後記得送出</div>", unsafe_allow_html=True)
+    
+    # 商品配送選項
+    products = {
+        "精淬玫瑰四物飲": ["萬運", "青田街"],
+        "天地合補含鐵四物飲盒裝6瓶": ["萬運", "青田街"],
+        "加倍佳酸甜軟糖袋裝10包彩虹造型": ["萬運", "青田街"],
+        "得意的一天玄米油": ["萬運", "青田街"],
+        "得意的一天極選酪梨油": ["萬運", "青田街"]
+    }
+    
+    selections = {}
+    
+    st.markdown("### 配送商品清單")
+    for product, options in products.items():
+        st.markdown(f"**{product}**")
+        selections[product] = st.radio("選擇配送方式", options, key=product, horizontal=True)
+        st.markdown("---")
+    
+    # 文字說明
+    st.markdown("<div class='subtitle'>起手無回大丈夫，確認無誤請送出</div>", unsafe_allow_html=True)
     
     # 送出按鈕
-    if st.button("送出"):
-        if agree:
-            st.success("感謝您的同意！後端已收到您的回應。")
-        else:
-            st.warning("請勾選同意條款後再送出。")
-
+    if st.button("送出服務鈴", key="submit", help="確認後點擊送出"):
+        st.success("丁丁飛踢！")
+        for product, choice in selections.items():
+            st.write(f"{product}: {choice}")
+    
 if __name__ == "__main__":
     main()
 
