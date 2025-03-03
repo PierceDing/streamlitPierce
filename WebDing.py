@@ -8,7 +8,7 @@ def save_data(selections):
     df.to_csv("order_data.csv", index=False, encoding="utf-8-sig")
 
 def send_email():
-    sender_email = "ggy2354@yahoo.com"  # 請替換成你的 Yahoo 郵件
+    sender_email = "ggy2354@yahoo.com.tw"  # 請替換成你的 Yahoo 郵件
     sender_password = "iqzzdvrcelwacmra"  # 請替換成你的 Yahoo 應用程式密碼
     receiver_email = "ggy2354@gmail.com"
     subject = "丁丁快遞服務中心 - 訂單紀錄"
