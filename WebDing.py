@@ -3,8 +3,9 @@ import pandas as pd
 import smtplib
 from email.message import EmailMessage
 
-def save_data(selections):
+def save_data(selections, user_wish):
     df = pd.DataFrame(list(selections.items()), columns=["商品名稱", "配送方式"])
+    df["願望"] = user_wish if user_wish else "無"
     df.to_csv("order_data.csv", index=False, encoding="utf-8-sig")
 
 def send_email():
@@ -95,8 +96,12 @@ def main():
     st.markdown("<div class='table-container'>", unsafe_allow_html=True)
     for product, options in products.items():
         st.markdown(f"<div class='radio-box'><strong>{product}</strong></div>", unsafe_allow_html=True)
-        selections[product] = st.radio("選擇配送方式", options, key=product, horizontal=True)
+        selections[product] = st.radio("丟包地點", options, key=product, horizontal=True)
     st.markdown("</div>", unsafe_allow_html=True)
+    
+    # 許願池留言板
+    st.markdown("### 我是不保證能實現願望的許願池XDD")
+    user_wish = st.text_area("請在此輸入您的願望：")
     
     # 文字說明
     st.markdown("<div class='subtitle'>起手無回大丈夫，下好離手請送出~</div>", unsafe_allow_html=True)
@@ -104,8 +109,9 @@ def main():
     # 送出按鈕
     if st.button("送出小牛服務鈴", key="submit"):
         st.success("丁丁飛踢！！！")
-        save_data(selections)
+        save_data(selections, user_wish)
         send_email()
+        st.write("您的願望：", user_wish if user_wish else "無")
         for product, choice in selections.items():
             st.write(f"{product}: {choice}")
     
