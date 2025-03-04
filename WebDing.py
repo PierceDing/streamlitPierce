@@ -79,7 +79,7 @@ def main():
     st.markdown("<div class='title'>丁丁快遞服務中心XD</div>", unsafe_allow_html=True)
     
     # 內文
-    st.markdown("<div class='subtitle'>請選擇商品配送地點</div>", unsafe_allow_html=True)
+    st.markdown("<div class='subtitle'>請選擇商品丟包地點</div>", unsafe_allow_html=True)
     
     # 商品配送選項
     products = {
@@ -100,7 +100,7 @@ def main():
     st.markdown("</div>", unsafe_allow_html=True)
     
     # 許願池留言板
-    st.markdown("### 我是不保證能實現願望的許願池XDD")
+    st.markdown("### 我是不保證能實現願望的許願池")
     user_wish = st.text_area("請在此輸入您的願望：")
     
     # 文字說明
